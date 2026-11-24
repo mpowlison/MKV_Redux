@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import sys
 import sysconfig
-from importlib.util import find_spec
+from importlib.metadata import PackageNotFoundError, distribution
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.request import urlopen
@@ -45,11 +45,28 @@ def prepare_archive(stage: Path) -> Path:
     return cached
 
 
+def pyinstaller_license() -> Path:
+    try:
+        installed = distribution("PyInstaller")
+    except PackageNotFoundError:
+        raise SystemExit("Install PyInstaller in your build environment first; see README.md.") from None
+
+    for entry in installed.files or ():
+        if entry.name.casefold() == "copying.txt":
+            path = Path(entry.locate())
+            if path.is_file():
+                return path
+    raise SystemExit(f"PyInstaller {installed.version} is missing COPYING.txt. Reinstall PyInstaller.")
+
+
 def main() -> None:
     if sysconfig.get_platform() != "win-amd64":
         raise SystemExit("Build MKV Redux on Windows using x64 Python.")
-    if find_spec("PyInstaller") is None:
-        raise SystemExit("Install PyInstaller in your build environment first; see README.md.")
+
+    pyi_license = pyinstaller_license()
+    python_license = Path(sys.base_prefix) / "LICENSE.txt"
+    if not python_license.is_file():
+        raise SystemExit(f"Missing {python_license}. Use the official Windows CPython distribution.")
 
     tar = Path(os.environ["SystemRoot"]) / "System32" / "tar.exe"
     if not tar.is_file():
@@ -77,7 +94,12 @@ def main() -> None:
         notices = upstream / "doc" / "licenses"
         shutil.copy2(upstream / "doc" / "COPYING.txt", notices / "MKVToolNix-COPYING.txt")
         shutil.copy2(upstream / "doc" / "README.txt", notices / "MKVToolNix-README.txt")
+        shutil.copy2(ROOT / "LICENSE", notices / "MKV-Redux-LICENSE.txt")
         shutil.copy2(ROOT / "THIRD_PARTY_NOTICES.txt", notices)
+        # The Windows CPython license includes notices for its bundled native dependencies.
+        shutil.copy2(python_license, notices / "CPython-LICENSE.txt")
+        shutil.copy2(pyi_license, notices / "PyInstaller-COPYING.txt")
+        shutil.copytree(ROOT / "third_party_licenses", notices, dirs_exist_ok=True)
 
         subprocess.run([str(engine), "--version"], check=True)
         # Ship mkvmerge unmodified as a standalone executable, not a linked library.

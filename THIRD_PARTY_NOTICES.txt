@@ -1,13 +1,62 @@
-MKV Redux includes the unmodified MKVToolNix v104.0 mkvmerge Windows x64
-executable. MKV Redux runs mkvmerge as a separate process.
+MKV Redux v1.0.0 - Windows x64 license and source notices
+========================================================
 
-MKVToolNix is by Moritz Bunkus and contributors and is licensed under
-version 2 of the GNU General Public License. See MKVToolNix-COPYING.txt
-for the license and MKVToolNix-README.txt for upstream component notices.
+MKV Redux itself is licensed under the GNU General Public License,
+version 2 only (GPL-2.0-only). See LICENSE in the source tree or
+MKV-Redux-LICENSE.txt in the portable app's Licenses folder. Bundled
+third-party components remain under their respective license terms.
+
+Release page: https://github.com/mpowlison/MKV_Redux/releases
+For the v1.0.0 Windows executable's corresponding-source archive, look
+for Windows-Corresponding-Source-v1.0.0.zip in the v1.0.0 release assets.
+The versions and upstream links below describe that release, not every
+local build.
+
+MKVToolNix 104.0
+----------------
+MKV Redux bundles the unmodified Windows x64 mkvmerge.exe from MKVToolNix,
+by Moritz Bunkus and contributors, and invokes it as a separate command-line
+process without linking to it. MKVToolNix is licensed upstream under GPLv2.
+See MKVToolNix-COPYING.txt, MKVToolNix-README.txt and the included upstream
+license files for its terms and component notices.
 
 Upstream project: https://mkvtoolnix.download/
 Source release: https://mkvtoolnix.download/sources/mkvtoolnix-104.0.tar.xz
 Windows release: https://mkvtoolnix.download/windows/releases/104.0/
 
-If you redistribute the build, keep the notices with it and comply with
-the licenses, including the GPL's corresponding-source requirements.
+CPython 3.14.7 and Windows runtime components
+---------------------------------------------
+CPython is distributed under the Python Software Foundation License
+Version 2 and other terms as noted in its distribution. The portable
+app includes the Windows distribution's LICENSE.txt as CPython-LICENSE.txt,
+including its third-party notices. See the section "Additional Conditions
+for this Windows binary build" for Microsoft Distributable Code, including
+Visual C++ runtime code. Those conditions apply to Microsoft's code, not
+to MKV Redux or the Python code itself.
+
+CPython release and source: https://www.python.org/downloads/release/python-3147/
+CPython Windows dependency references: https://github.com/python/cpython/blob/v3.14.7/PCbuild/get_externals.bat
+Microsoft redistribution information: https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files
+
+Tcl/Tk 9.0.4 license terms and the Apache License 2.0 text for OpenSSL
+3.5.7 (the CPython libcrypto/libssl DLLs, when collected) are also included
+in CPython-LICENSE.txt.
+Tcl source: https://github.com/tcltk/tcl/tree/core-9-0-4
+Tk source: https://github.com/tcltk/tk/tree/core-9-0-4
+OpenSSL source: https://github.com/openssl/openssl/tree/openssl-3.5.7
+
+Additional notices for HACL*, mpdecimal, zlib-ng, Unicode data, and Tcl's
+LibTomMath and zlib are in third_party_licenses/ in the source tree and in
+Licenses in the portable app. For CPython's liblzma, see the XZ Utils
+licensing summary: https://github.com/python/cpython-source-deps/blob/xz-5.2.5/COPYING.
+
+PyInstaller 6.22.3
+------------------
+PyInstaller is licensed under GPLv2 or later with an exception for
+redistributing the bootloader and related files in a combined executable.
+Its runtime hooks and certain runtime modules are under Apache License
+2.0. See PyInstaller-COPYING.txt for the license texts and exception.
+Source: https://github.com/pyinstaller/pyinstaller/tree/v6.22.3
+
+If you redistribute the Windows build, keep its notices and follow the
+applicable licenses, including the GPL's corresponding-source requirements.

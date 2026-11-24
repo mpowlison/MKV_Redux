@@ -4,7 +4,9 @@ A Windows desktop app for removing audio tagged in languages other than English 
 
 ## Get started
 
-1. Double-click **`dist/MKV Redux.exe`** on Windows 10 or newer (x64). You can move or copy the executable on its own. It bundles Python, Tkinter, and the MKVToolNix remux engine. No installation or internet connection is required to run it.
+Download the **Windows x64 `.exe`** from the [latest GitHub release](https://github.com/mpowlison/MKV_Redux/releases/latest). The release also provides a SHA-256 checksum and a corresponding-source archive.
+
+1. Double-click the downloaded `.exe` on Windows 10 or newer (x64). You can move or copy the executable on its own. It bundles Python, Tkinter, and the MKVToolNix remux engine. No installation or internet connection is required to run it.
 2. Click **Add MKV files…** to select specific videos, or **Add folder…** to find `.mkv` files in a folder and all its subfolders. Files already in the queue aren't added again.
 3. Select a row to review the audio tracks. Click **Create English copies**, or turn on **Replace originals** to keep the existing filenames instead.
 
@@ -39,7 +41,7 @@ Run tests with `py -3 -m unittest discover -s tests -v`. Integration tests run w
 
 ### Build the portable Windows executable
 
-Use Windows with x64 Python 3.10+ and the Windows `tar.exe` utility:
+Use the official Windows x64 distribution of CPython 3.10+ with Tkinter and the Windows `tar.exe` utility:
 
 ```powershell
 py -3 -m venv .venv
@@ -47,4 +49,10 @@ py -3 -m venv .venv
 .venv\Scripts\python.exe build_windows.py
 ```
 
-The build downloads and verifies the pinned MKVToolNix archive, caches it under `build/windows/`, and embeds `mkvmerge.exe` into `dist/MKV Redux.exe`. The download is build-time only. See [third-party notices](THIRD_PARTY_NOTICES.txt) for upstream licensing and source information. The same notices are available from **Licenses…** in the portable app.
+The build downloads and verifies the pinned MKVToolNix archive, caches it under `build/windows/`, and embeds `mkvmerge.exe` into `dist/MKV Redux.exe`. The download is build-time only.
+
+## Licensing
+
+MKV Redux itself is licensed under the [GNU General Public License, version 2 only](LICENSE) (`GPL-2.0-only`). It runs the bundled MKVToolNix 104.0 `mkvmerge.exe` as a separate command-line process without linking to it. MKVToolNix is licensed upstream under GPLv2; its dependencies, CPython, Tcl/Tk, PyInstaller, and other third-party components retain their own license terms.
+
+See [third-party notices](THIRD_PARTY_NOTICES.txt) and [Windows release sources](WINDOWS_SOURCES.md) for license and build details. The project license and bundled notices are available from **Licenses…** in the portable app.
