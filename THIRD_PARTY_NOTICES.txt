@@ -1,0 +1,13 @@
+MKV Redux includes the unmodified MKVToolNix v104.0 mkvmerge Windows x64
+executable. MKV Redux runs mkvmerge as a separate process.
+
+MKVToolNix is by Moritz Bunkus and contributors and is licensed under
+version 2 of the GNU General Public License. See MKVToolNix-COPYING.txt
+for the license and MKVToolNix-README.txt for upstream component notices.
+
+Upstream project: https://mkvtoolnix.download/
+Source release: https://mkvtoolnix.download/sources/mkvtoolnix-104.0.tar.xz
+Windows release: https://mkvtoolnix.download/windows/releases/104.0/
+
+If you redistribute the build, keep the notices with it and comply with
+the licenses, including the GPL's corresponding-source requirements.
